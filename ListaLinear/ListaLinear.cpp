@@ -122,8 +122,25 @@ void inserirElemento()
 
 void excluirElemento()
 {
-
-
+	// Checa se a lista possui elementos
+		if (nElementos == 0) {
+			cout << "A lista não possui elementos.\n";
+		}
+		else { // Caso possua elementos: 
+			int valor = 0; // Declaro uma variável chamada "valor" com o valor 0
+			cout << "Digite o valor da Lista que deseja Excluir:\n"; //Pede para o usuário digitar o valor na lista que ele quer excluir
+			cin >> valor; // O usuário digita o valor que ele excluir, e armazena na variável "valor"
+			int pos = posicaoElemento(valor); // Invoco a função posicaoElemento() e passo como parâmetro, o valor digitado pelo usuário, essa função retorna a posição do elemento digitado pelo usuário
+			if (pos == -1) { // Se o valor retornado for -1
+				cout << "Elemento nao encontrado.\n"; // Mostra para o usuário que o elemento digitado não foi encontrado
+			}
+			else { // caso o valor NÃO seja -1
+				for (int i = 0; i < nElementos - 2; i++) { // Crio um laço de repetição que percorre a lista até o penúltimo elemento
+					lista[i] = lista[i + 1]; // Atribuo ao índice atual no laço de repetição, o valor do índice seguinte
+				}
+				nElementos = nElementos - 1; // Diminuo o numero de elementos em 1, ja que um elemento foi excluído
+			}
+		}
 }
 
 void buscarElemento()
@@ -142,13 +159,13 @@ void buscarElemento()
 	}
 }
 
-int posicaoElemento(int busca)
+int posicaoElemento(int valor)
 {
-	int posicao = -1;
 	for (int i = 0; i < nElementos; i++) {
-		if (busca == lista[i]) {
-			posicao = i;
+		if (lista[i] == valor) {
+			return i;
 		}
 	}
-	return posicao;
+	return -1;
 }
+
